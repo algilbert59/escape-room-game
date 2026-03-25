@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escape Room Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #f4f4f9; color: #333; }
+        .container { width: 80%; margin: 0 auto; }
+        .room { display: none; padding: 20px; border: 1px solid #ccc; border-radius: 5px; margin-top: 20px; background: #fff; }
+        .active { display: block; }
+        nav { margin: 20px 0; }
+        nav button { margin-right: 10px; }
+        h1 { text-align: center; }
+        footer { text-align: center; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Escape Room Game</h1>
+        <nav>
+            <button onclick="showRoom('room1')">Room 1: Postpartum Hemorrhage & Infection</button>
+            <button onclick="showRoom('room2')">Room 2: Neonatal Jaundice</button>
+            <button onclick="showRoom('room3')">Room 3: Postpartum Psychosis</button>
+        </nav>
+
+        <div id="room1" class="room active">
+            <h2>Room 1: Postpartum Hemorrhage & Infection</h2>
+            <p>In this room, you need to identify the symptoms of postpartum hemorrhage and infection.</p>
+            <button onclick="alert('Room 1: Task completed!')">Complete Task</button>
+        </div>
+
+        <div id="room2" class="room">
+            <h2>Room 2: Neonatal Jaundice</h2>
+            <p>Understand the causes and treatments of neonatal jaundice to escape this room.</p>
+            <button onclick="alert('Room 2: Task completed!')">Complete Task</button>
+        </div>
+
+        <div id="room3" class="room">
+            <h2>Room 3: Postpartum Psychosis</h2>
+            <p>Learn about the signs of postpartum psychosis to move ahead.</p>
+            <button onclick="alert('Room 3: Task completed!')">Complete Task</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Escape Room Game</p>
+    </footer>
+
+    <script>
+        function showRoom(room) {
+            const rooms = document.querySelectorAll('.room');
+            rooms.forEach(r => r.classList.remove('active'));
+            document.getElementById(room).classList.add('active');
+        }
+    </script>
+</body>
+</html>
