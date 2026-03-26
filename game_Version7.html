@@ -1067,6 +1067,7 @@ table td {
                 const content = document.getElementById(`room${pendingRoom}-content`);
                 if (overlay) overlay.classList.add('hidden');
                 if (content) content.style.display = 'block';
+                document.getElementById('collected-codes').textContent = room1Code;
                 changeRoomDirect(pendingRoom);
                 document.getElementById(`room${pendingRoom}-btn`).disabled = false;
             } else {
