@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postpartum & Newborn Care Escape Room Game</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    color: #2c3e50;
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.header {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.team-info h1 {
+    color: #667eea;
+    font-size: 24px;
+    margin: 0;
+    font-weight: 700;
+}
+
+.timer-section {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+}
+
+.timer-label {
+    font-size: 11px;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.timer {
+    font-size: 32px;
+    font-weight: 700;
+    color: #764ba2;
+    font-family: 'Monaco', 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+.game-content {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.room-display {
+    padding: 45px 50px;
+}
+
+.room-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+    border-bottom: 3px solid #f0f0f0;
+}
+
+.room-number {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.room-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: #2c3e50;
+    flex: 1;
+    margin: 0 25px;
+}
+
+.progress {
+    font-size: 13px;
+    color: #888;
+    background: #f5f5f5;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-weight: 600;
+}
+
+.code-display {
+    background: linear-gradient(135deg, #4CAF50, #45a049);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-family: 'Monaco', monospace;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.scenario-box {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8eef9 100%);
+    border-left: 5px solid #667eea;
+    padding: 30px;
+    margin-bottom: 35px;
+    border-radius: 12px;
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.scenario-box h3 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.scenario-box h4 {
+    color: #764ba2;
+    margin-top: 25px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.patient-info-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.patient-info-box p {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 8px;
+    line-height: 1.6;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+table thead {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+table th {
+    padding: 15px 12px;
+    text-align: left;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+table tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+table td {
+    padding: 14px 12px;
+    color: #555;
+}
+
+.question-box {
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8eef9 100%);
+    border-left: 5px solid #667eea;
+    padding: 30px;
+    margin-bottom: 35px;
+    border-radius: 12px;
+}
+
+.question-box h3 {
+    color: #667eea;
+    font-size: 18px;
+    margin: 0;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
+.answer-area {
+    margin: 35px 0;
+    padding: 30px;
+    background: linear-gradient(135deg, #fafafa 0%, #f5f5f5 100%);
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+}
+
+.singleselect-container, .multiselect-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.option-label, .checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: white;
+    border: 2px solid #e8e8e8;
+}
+
+.option-label:hover, .checkbox-label:hover {
+    background: #f9f9f9;
+    border-color: #667eea;
+}
+
+.option-radio, .option-checkbox {
+    margin: 0;
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: #667eea;
+}
+
+.option-text {
+    flex: 1;
+    line-height: 1.5;
+    color: #555;
+    font-size: 14px;
+}
+
+.hint-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: linear-gradient(135deg, #fffbea 0%, #fff8dc 100%);
+    border-left: 5px solid #ffc107;
+    border-radius: 12px;
+}
+
+.hint-btn {
+    background: linear-gradient(135deg, #ffc107, #ffb300);
+    color: #333;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.hint-btn:hover {
+    background: linear-gradient(135deg, #ffb300, #ffa000);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+}
+
+.hint-text {
+    margin-top: 15px;
+    padding: 18px;
+    background: white;
+    border-radius: 10px;
+    border-left: 4px solid #ffc107;
+    color: #555;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 35px;
+    justify-content: center;
+}
+
+.submit-btn {
+    padding: 14px 40px;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+}
+
+.submit-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #5568d3, #6a3d8c);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(102, 126, 234, 0.4);
+}
+
+.room-selector {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.room-btn {
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 700;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.room-btn.active {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border-color: transparent;
+}
+
+.room-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.room-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #ccc;
+    color: #666;
+}
+
+.room-section {
+    display: none;
+}
+
+.room-section.active {
+    display: block;
+}
+
+.feedback-box {
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-weight: 700;
+    display: none;
+}
+
+.feedback-box.success {
+    background: linear-gradient(135deg, #C8E6C9, #A5D6A7);
+    border-left: 5px solid #4CAF50;
+    color: #2E7D32;
+    display: block;
+}
+
+.feedback-box.error {
+    background: linear-gradient(135deg, #FFCDD2, #EF9A9A);
+    border-left: 5px solid #F44336;
+    color: #C62828;
+    display: block;
+}
+
+.question-section {
+    display: block;
+}
+
+.question-section.hidden {
+    display: none;
+}
+
+.locked-overlay {
+    background: rgba(0, 0, 0, 0.7);
+    padding: 40px;
+    text-align: center;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    min-height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.locked-overlay.hidden {
+    display: none;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    text-align: center;
+}
+
+.modal-content h2 {
+    color: #667eea;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.unlock-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 18px;
+    border: 2px solid #667eea;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    font-family: 'Monaco', monospace;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-sizing: border-box;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.modal-btn {
+    padding: 12px 30px;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-btn.confirm {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.modal-btn.confirm:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.modal-btn.cancel {
+    background: #ccc;
+    color: #333;
+}
+
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="room-selector">
+            <button class="room-btn active" onclick="changeRoom(1)">Room 1: Hemorrhage & Infection</button>
+            <button class="room-btn" onclick="attemptChangeRoom(2)" id="room2-btn" disabled>🔒 Room 2: Neonatal Jaundice</button>
+            <button class="room-btn" onclick="attemptChangeRoom(3)" id="room3-btn" disabled>🔒 Room 3: Postpartum Psychosis</button>
+        </div>
+
+        <div class="code-display">
+            Collected Codes: <span id="collected-codes">____</span>
+        </div>
+
+        <div id="unlock-modal" class="modal">
+            <div class="modal-content">
+                <h2>🔐 Room Locked</h2>
+                <p id="modal-message">Enter the password:</p>
+                <input type="text" id="password-input" class="unlock-input" placeholder="Enter password..." oninput="this.value = this.value.toUpperCase()">
+                <div class="modal-buttons">
+                    <button class="modal-btn confirm" onclick="submitPassword()">Unlock</button>
+                    <button class="modal-btn cancel" onclick="closeModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROOM 1 -->
+        <div id="room1" class="room-section active">
+            <div class="header">
+                <div class="team-info"><h1>Room 1: Postpartum Hemorrhage & Infection</h1></div>
+                <div class="timer-section">
+                    <div><div class="timer-label">Elapsed Time</div><div class="timer" id="room1-timer">00:00</div></div>
+                </div>
+            </div>
+            <div class="game-content">
+                <div class="room-display">
+                    <div class="room-header">
+                        <span class="room-number">Room 1</span>
+                        <span class="room-title">Postpartum Hemorrhage & Infection</span>
+                        <span class="progress" id="room1-progress">Question 1 of 5</span>
+                    </div>
+                    <div id="room1-feedback" class="feedback-box"></div>
+
+                    <div id="room1-q1" class="question-section">
+                        <div class="scenario-box">
+                            <h3>📋 Patient Case: Amanda</h3>
+                            <div class="patient-info-box">
+                                <h4 style="margin-top: 0;">Patient Information:</h4>
+                                <p><strong>Name:</strong> Amanda | <strong>Age:</strong> 28 | <strong>G2P1</strong></p>
+                                <p><strong>Delivery:</strong> Spontaneous vaginal delivery at 0800 hours</p>
+                                <p><strong>Current Assessment:</strong> 2000 hours (12 hours postpartum)</p>
+                            </div>
+                            <h4>📈 Vital Signs at 12 hours:</h4>
+                            <table>
+                                <thead><tr><th>Vital</th><th>Value</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Blood Pressure</td><td>98/58 mmHg</td></tr>
+                                    <tr><td>Heart Rate</td><td>104 bpm</td></tr>
+                                    <tr><td>Temperature</td><td>101.8°F</td></tr>
+                                    <tr><td>Respiratory Rate</td><td>19 breaths/min</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="question-box">
+                            <h3>Which vital sign is MOST concerning?</h3>
+                        </div>
+
+                        <div class="answer-area">
+                            <div class="singleselect-container">
+                                <label class="option-label">
+                                    <input type="radio" class="option-radio" name="q1" value="A">
+                                    <span class="option-text">A. Heart rate: 104 bpm</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" class="option-radio" name="q1" value="B">
+                                    <span class="option-text">B. Blood pressure: 98/58 mmHg</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" class="option-radio" name="q1" value="C">
+                                    <span class="option-text">C. Temperature: 101.8°F</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" class="option-radio" name="q1" value="D">
+                                    <span class="option-text">D. Respiratory rate: 19 breaths/min</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="hint-section">
+                            <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                            <div class="hint-text">
+                                <p><strong>Hint:</strong> Compare current BP (98/58) to normal - this indicates shock.</p>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button type="button" class="submit-btn" onclick="checkAnswer('q1', 'B', 'SHOCK', 1, 'room1')">Submit Answer</button>
+                        </div>
+                    </div>
+
+                    <div id="room1-q2" class="question-section hidden">
+                        <div class="question-box"><h3>Priority interventions? (Select all)</h3></div>
+                        <div class="answer-area">
+                            <div class="multiselect-container">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="option-checkbox" name="q2" value="A">
+                                    <span class="option-text">A. Assess abdomen and lochia</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="option-checkbox" name="q2" value="B">
+                                    <span class="option-text">B. Establish IV access</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="option-checkbox" name="q2" value="C">
+                                    <span class="option-text">C. Cardiac monitoring</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" class="option-checkbox" name="q2" value="D">
+                                    <span class="option-text">D. Administer antibiotics</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="hint-section">
+                            <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                            <div class="hint-text"><p><strong>Hint:</strong> Select all that assess/monitor and prepare for emergency.</p></div>
+                        </div>
+                        <div class="action-buttons">
+                            <button type="button" class="submit-btn" onclick="checkMultiAnswer('q2', ['A','B','C','D'], 'HEMOR', 2, 'room1')">Submit Answer</button>
+                        </div>
+                    </div>
+
+                    <div id="room1-q3" class="question-section hidden">
+                        <div class="question-box"><h3>Order of nursing actions?</h3></div>
+                        <div class="answer-area">
+                            <div class="singleselect-container">
+                                <label class="option-label">
+                                    <input type="radio" class="option-radio" name="q3" value="A">
+                                    <span class="option-text">A. Notify → Access → Monitor → Assess</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" class="option-radio" name="q3" value="B">
+                                    <span class="option-text">B. Assess → Access → Monitor → Notify</span>
+                                </label>
+                                <label class="option-label">
+                                    <input type="radio" class="option-radio" name="q3" value="C">
+                                    <span class="option-text">C. Access → Assess → Notify → Monitor</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="hint-section">
+                            <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                            <div class="hint-text"><p><strong>Hint:</strong> EMERGENCY - Notify first!</p></div>
+                        </div>
+                        <div class="action-buttons">
+                            <button type="button" class="submit-btn" onclick="checkAnswer('q3', 'A', 'RHAGE', 3, 'room1')">Submit Answer</button>
+                        </div>
+                    </div>
+
+                    <div id="room1-q4" class="question-section hidden">
+                        <div class="question-box"><h3>Boggy uterus indicates?</h3></div>
+                        <div class="answer-area">
+                            <div class="singleselect-container">
+                                <label class="option-label"><input type="radio" class="option-radio" name="q4" value="A"><span class="option-text">A. Hemorrhage only</span></label>
+                                <label class="option-label"><input type="radio" class="option-radio" name="q4" value="B"><span class="option-text">B. Infection only</span></label>
+                                <label class="option-label"><input type="radio" class="option-radio" name="q4" value="C"><span class="option-text">C. Both</span></label>
+                            </div>
+                        </div>
+                        <div class="hint-section">
+                            <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                            <div class="hint-text"><p><strong>Hint:</strong> Inadequate uterine contraction = excessive bleeding</p></div>
+                        </div>
+                        <div class="action-buttons">
+                            <button type="button" class="submit-btn" onclick="checkAnswer('q4', 'A', 'INFEC', 4, 'room1')">Submit Answer</button>
+                        </div>
+                    </div>
+
+                    <div id="room1-q5" class="question-section hidden">
+                        <div class="question-box"><h3>After treatment, therapeutic response indicated by?</h3></div>
+                        <div class="answer-area">
+                            <div class="singleselect-container">
+                                <label class="option-label"><input type="radio" class="option-radio" name="q5" value="A"><span class="option-text">A. All vital signs and labs normalized</span></label>
+                                <label class="option-label"><input type="radio" class="option-radio" name="q5" value="B"><span class="option-text">B. Only BP improved</span></label>
+                                <label class="option-label"><input type="radio" class="option-radio" name="q5" value="C"><span class="option-text">C. Only temperature improved</span></label>
+                            </div>
+                        </div>
+                        <div class="hint-section">
+                            <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                            <div class="hint-text"><p><strong>Hint:</strong> Complete recovery shows all improvements</p></div>
+                        </div>
+                        <div class="action-buttons">
+                            <button type="button" class="submit-btn" onclick="checkAnswer('q5', 'A', 'TION', 5, 'room1')">Submit Answer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROOM 2 -->
+        <div id="room2" class="room-section">
+            <div class="header">
+                <div class="team-info"><h1>Room 2: Neonatal Jaundice</h1></div>
+                <div class="timer-section">
+                    <div><div class="timer-label">Elapsed Time</div><div class="timer" id="room2-timer">00:00</div></div>
+                </div>
+            </div>
+            <div class="game-content">
+                <div class="room-display">
+                    <div class="locked-overlay" id="room2-locked">🔒 ROOM 2 LOCKED<br><br>Complete Room 1 and enter password to unlock</div>
+                    <div id="room2-content" style="display: none;">
+                        <div class="room-header">
+                            <span class="room-number">Room 2</span>
+                            <span class="room-title">Neonatal Jaundice</span>
+                            <span class="progress" id="room2-progress">Question 1 of 5</span>
+                        </div>
+                        <div id="room2-feedback" class="feedback-box"></div>
+
+                        <div id="room2-q1" class="question-section">
+                            <div class="scenario-box">
+                                <h3>👶 Patient Case: Baby Martinez</h3>
+                                <p><strong>Age:</strong> 48 hours old | <strong>Weight:</strong> 3650g</p>
+                                <p><strong>Bilirubin Level:</strong> 16.8 mg/dL</p>
+                            </div>
+                            <div class="question-box"><h3>Clinical action needed?</h3></div>
+                            <div class="answer-area">
+                                <div class="singleselect-container">
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r1" value="A"><span class="option-text">A. No intervention</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r1" value="B"><span class="option-text">B. Continue monitoring</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r1" value="C"><span class="option-text">C. Initiate phototherapy</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> At 48 hours, 16.8 is above phototherapy threshold</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkAnswer('q2r1', 'C', 'BILI', 1, 'room2')">Submit Answer</button>
+                            </div>
+                        </div>
+
+                        <div id="room2-q2" class="question-section hidden">
+                            <div class="question-box"><h3>Nursing priorities? (Select all)</h3></div>
+                            <div class="answer-area">
+                                <div class="multiselect-container">
+                                    <label class="checkbox-label"><input type="checkbox" class="option-checkbox" name="q2r2" value="A"><span class="option-text">A. Neurologic assessment</span></label>
+                                    <label class="checkbox-label"><input type="checkbox" class="option-checkbox" name="q2r2" value="B"><span class="option-text">B. Assess breastfeeding</span></label>
+                                    <label class="checkbox-label"><input type="checkbox" class="option-checkbox" name="q2r2" value="C"><span class="option-text">C. Parent education</span></label>
+                                    <label class="checkbox-label"><input type="checkbox" class="option-checkbox" name="q2r2" value="D"><span class="option-text">D. Prepare for phototherapy</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> All are priority actions</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkMultiAnswer('q2r2', ['A','B','C','D'], 'RUBIN', 2, 'room2')">Submit Answer</button>
+                            </div>
+                        </div>
+
+                        <div id="room2-q3" class="question-section hidden">
+                            <div class="question-box"><h3>Phototherapy sequence?</h3></div>
+                            <div class="answer-area">
+                                <div class="singleselect-container">
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r3" value="A"><span class="option-text">A. Eye patches → Light → Monitor temp</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r3" value="B"><span class="option-text">B. Light → Eye patches → Monitor temp</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> Protect eyes FIRST before light</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkAnswer('q2r3', 'A', 'LIGHT', 3, 'room2')">Submit Answer</button>
+                            </div>
+                        </div>
+
+                        <div id="room2-q4" class="question-section hidden">
+                            <div class="question-box"><h3>Type of jaundice at 48 hours?</h3></div>
+                            <div class="answer-area">
+                                <div class="singleselect-container">
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r4" value="A"><span class="option-text">A. Physiologic</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r4" value="B"><span class="option-text">B. Pathologic</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> Accelerated onset = pathologic</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkAnswer('q2r4', 'B', 'KERNI', 4, 'room2')">Submit Answer</button>
+                            </div>
+                        </div>
+
+                        <div id="room2-q5" class="question-section hidden">
+                            <div class="question-box"><h3>After 24hr phototherapy, bilirubin = 12.2, feeding good - indicates?</h3></div>
+                            <div class="answer-area">
+                                <div class="singleselect-container">
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r5" value="A"><span class="option-text">A. Treatment working - continue</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q2r5" value="B"><span class="option-text">B. Need further intervention</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> Dropping bilirubin = good response</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkAnswer('q2r5', 'A', 'CTUS', 5, 'room2')">Submit Answer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ROOM 3 -->
+        <div id="room3" class="room-section">
+            <div class="header">
+                <div class="team-info"><h1>Room 3: Postpartum Psychosis</h1></div>
+                <div class="timer-section">
+                    <div><div class="timer-label">Elapsed Time</div><div class="timer" id="room3-timer">00:00</div></div>
+                </div>
+            </div>
+            <div class="game-content">
+                <div class="room-display">
+                    <div class="locked-overlay" id="room3-locked">🔒 ROOM 3 LOCKED<br><br>Complete Room 2 and enter password to unlock</div>
+                    <div id="room3-content" style="display: none;">
+                        <div class="room-header">
+                            <span class="room-number">Room 3</span>
+                            <span class="room-title">Postpartum Psychosis</span>
+                            <span class="progress" id="room3-progress">Question 1 of 5</span>
+                        </div>
+                        <div id="room3-feedback" class="feedback-box"></div>
+
+                        <div id="room3-q1" class="question-section">
+                            <div class="scenario-box">
+                                <h3>🧠 Patient Case: Jennifer</h3>
+                                <p><strong>Age:</strong> 32 | <strong>Day Postpartum:</strong> 5</p>
+                                <p><strong>Symptoms:</strong> No sleep x 48hrs, delusions, paranoia, rapid speech, agitation</p>
+                            </div>
+                            <div class="question-box"><h3>Most likely diagnosis?</h3></div>
+                            <div class="answer-area">
+                                <div class="singleselect-container">
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r1" value="A"><span class="option-text">A. Postpartum blues</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r1" value="B"><span class="option-text">B. Postpartum depression</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r1" value="C"><span class="option-text">C. Postpartum psychosis</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> Delusions and psychotic features = psychosis</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkAnswer('q3r1', 'C', 'PSYCH', 1, 'room3')">Submit Answer</button>
+                            </div>
+                        </div>
+
+                        <div id="room3-q2" class="question-section hidden">
+                            <div class="question-box"><h3>Immediate priorities? (Select all)</h3></div>
+                            <div class="answer-area">
+                                <div class="multiselect-container">
+                                    <label class="checkbox-label"><input type="checkbox" class="option-checkbox" name="q3r2" value="A"><span class="option-text">A. Safety assessment</span></label>
+                                    <label class="checkbox-label"><input type="checkbox" class="option-checkbox" name="q3r2" value="B"><span class="option-text">B. Separate from infant</span></label>
+                                    <label class="checkbox-label"><input type="checkbox" class="option-checkbox" name="q3r2" value="C"><span class="option-text">C. 1:1 observation</span></label>
+                                    <label class="checkbox-label"><input type="checkbox" class="option-checkbox" name="q3r2" value="D"><span class="option-text">D. Notify psychiatry</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> Psychiatric emergency - all are critical</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkMultiAnswer('q3r2', ['A','B','C','D'], 'OSIS', 2, 'room3')">Submit Answer</button>
+                            </div>
+                        </div>
+
+                        <div id="room3-q3" class="question-section hidden">
+                            <div class="question-box"><h3>First-line treatment?</h3></div>
+                            <div class="answer-area">
+                                <div class="singleselect-container">
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r3" value="A"><span class="option-text">A. SSRIs only</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r3" value="B"><span class="option-text">B. Antipsychotics + mood stabilizers</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r3" value="C"><span class="option-text">C. Supportive therapy only</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> Psychosis requires antipsychotics urgently</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkAnswer('q3r3', 'B', 'POST', 3, 'room3')">Submit Answer</button>
+                            </div>
+                        </div>
+
+                        <div id="room3-q4" class="question-section hidden">
+                            <div class="question-box"><h3>Key difference: psychosis vs depression?</h3></div>
+                            <div class="answer-area">
+                                <div class="singleselect-container">
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r4" value="A"><span class="option-text">A. Psychosis has delusions/hallucinations</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r4" value="B"><span class="option-text">B. Depression has delusions/hallucinations</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r4" value="C"><span class="option-text">C. No difference</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> Psychosis = loss of reality contact</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkAnswer('q3r4', 'A', 'PART', 4, 'room3')">Submit Answer</button>
+                            </div>
+                        </div>
+
+                        <div id="room3-q5" class="question-section hidden">
+                            <div class="question-box"><h3>After 2 weeks treatment - improved symptoms indicates?</h3></div>
+                            <div class="answer-area">
+                                <div class="singleselect-container">
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r5" value="A"><span class="option-text">A. Continue meds and monitoring</span></label>
+                                    <label class="option-label"><input type="radio" class="option-radio" name="q3r5" value="B"><span class="option-text">B. Cure - stop meds immediately</span></label>
+                                </div>
+                            </div>
+                            <div class="hint-section">
+                                <button type="button" class="hint-btn" onclick="toggleHint(this)">💡 Get a Hint</button>
+                                <div class="hint-text"><p><strong>Hint:</strong> High relapse risk - long-term management needed</p></div>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="submit-btn" onclick="checkAnswer('q3r5', 'A', 'URE', 5, 'room3')">Submit Answer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let totalSeconds = 0;
+        let room1Code = '';
+        let room2Code = '';
+        let pendingRoom = null;
+
+        window.addEventListener('load', function() {
+            setInterval(function() {
+                totalSeconds++;
+                const mins = Math.floor(totalSeconds / 60);
+                const secs = totalSeconds % 60;
+                const timeStr = String(mins).padStart(2, '0') + ':' + String(secs).padStart(2, '0');
+                document.getElementById('room1-timer').textContent = timeStr;
+                document.getElementById('room2-timer').textContent = timeStr;
+                document.getElementById('room3-timer').textContent = timeStr;
+            }, 1000);
+        });
+
+        function toggleHint(button) {
+            const hint = button.nextElementSibling;
+            if (hint && hint.classList.contains('hint-text')) {
+                hint.style.display = hint.style.display === 'none' ? 'block' : 'none';
+            }
+        }
+
+        function checkAnswer(name, correct, code, num, room) {
+            const selected = document.querySelector(`input[name="${name}"]:checked`);
+            const feedback = document.getElementById(`${room}-feedback`);
+            
+            if (!selected) {
+                feedback.className = 'feedback-box error';
+                feedback.textContent = '❌ Select an answer!';
+                return;
+            }
+            
+            if (selected.value === correct) {
+                feedback.className = 'feedback-box success';
+                feedback.textContent = `✅ CORRECT! Code: ${code}`;
+                
+                if (room === 'room1') {
+                    room1Code += (room1Code ? '-' : '') + code;
+                } else if (room === 'room2') {
+                    room2Code += (room2Code ? '-' : '') + code;
+                }
+                
+                document.getElementById(`${room}-q${num}`).classList.add('hidden');
+                
+                if (num < 5) {
+                    document.getElementById(`${room}-q${num + 1}`).classList.remove('hidden');
+                    document.getElementById(`${room}-progress`).textContent = `Question ${num + 1} of 5`;
+                } else {
+                    const nextRoom = room === 'room1' ? 2 : 3;
+                    feedback.innerHTML = `🎉 ROOM COMPLETE!<br><strong>Code: ${room === 'room1' ? room1Code : room2Code}</strong>`;
+                    document.getElementById(`room${nextRoom}-btn`).disabled = false;
+                }
+            } else {
+                feedback.className = 'feedback-box error';
+                feedback.textContent = '❌ Incorrect!';
+            }
+        }
+
+        function checkMultiAnswer(name, correct, code, num, room) {
+            const selected = Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(el => el.value);
+            const feedback = document.getElementById(`${room}-feedback`);
+            
+            if (selected.length === 0) {
+                feedback.className = 'feedback-box error';
+                feedback.textContent = '❌ Select answers!';
+                return;
+            }
+            
+            const isCorrect = selected.length === correct.length && correct.every(v => selected.includes(v));
+            
+            if (isCorrect) {
+                feedback.className = 'feedback-box success';
+                feedback.textContent = `✅ CORRECT! Code: ${code}`;
+                
+                if (room === 'room1') {
+                    room1Code += (room1Code ? '-' : '') + code;
+                } else if (room === 'room2') {
+                    room2Code += (room2Code ? '-' : '') + code;
+                }
+                
+                document.getElementById(`${room}-q${num}`).classList.add('hidden');
+                
+                if (num < 5) {
+                    document.getElementById(`${room}-q${num + 1}`).classList.remove('hidden');
+                    document.getElementById(`${room}-progress`).textContent = `Question ${num + 1} of 5`;
+                } else {
+                    const nextRoom = room === 'room1' ? 2 : 3;
+                    feedback.innerHTML = `🎉 ROOM COMPLETE!<br><strong>Code: ${room === 'room1' ? room1Code : room2Code}</strong>`;
+                    document.getElementById(`room${nextRoom}-btn`).disabled = false;
+                }
+            } else {
+                feedback.className = 'feedback-box error';
+                feedback.textContent = '❌ Incorrect!';
+            }
+        }
+
+        function changeRoom(num) {
+            document.querySelectorAll('.room-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(`room${num}`).classList.add('active');
+            document.querySelectorAll('.room-btn').forEach(el => el.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        function attemptChangeRoom(num) {
+            if ((num === 2 && document.getElementById('room2-btn').disabled) ||
+                (num === 3 && document.getElementById('room3-btn').disabled)) {
+                alert('Room locked! Complete previous room first.');
+                return;
+            }
+            pendingRoom = num;
+            document.getElementById('unlock-modal').classList.add('show');
+            document.getElementById('password-input').value = '';
+            document.getElementById('password-input').focus();
+            document.getElementById('modal-message').textContent = `Enter password from Room ${num - 1}:`;
+        }
+
+        function submitPassword() {
+            const password = document.getElementById('password-input').value.toUpperCase().trim();
+            const expected = pendingRoom === 2 ? room1Code : room2Code;
+            
+            if (password === expected) {
+                closeModal();
+                const overlay = document.getElementById(`room${pendingRoom}-locked`);
+                const content = document.getElementById(`room${pendingRoom}-content`);
+                if (overlay) overlay.classList.add('hidden');
+                if (content) content.style.display = 'block';
+                changeRoomDirect(pendingRoom);
+                document.getElementById(`room${pendingRoom}-btn`).disabled = false;
+            } else {
+                alert(`❌ Wrong password!\nExpected: ${expected}\nYou entered: ${password}`);
+            }
+        }
+
+        function changeRoomDirect(num) {
+            document.querySelectorAll('.room-section').forEach(el => el.classList.remove('active'));
+            document.getElementById(`room${num}`).classList.add('active');
+            document.querySelectorAll('.room-btn').forEach(el => el.classList.remove('active'));
+            document.getElementById(`room${num}-btn`).classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('unlock-modal').classList.remove('show');
+            pendingRoom = null;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('password-input');
+            if (input) {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') submitPassword();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
